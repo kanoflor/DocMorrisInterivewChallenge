@@ -20,7 +20,7 @@ This project is part of the DocMorris coding challenge. The goal is to lay a sol
 
 ### Styling
 
-**[Restyle](https://github.com/Shopify/restyle) by Shopify**
+**[Restyle](https://github.com/Shopify/restyle) by Shopify + StyleSheet**
 
 - A scalable theme system with type-safe design tokens
 - Fast rendering with no runtime style computation (unlike styled-components)
