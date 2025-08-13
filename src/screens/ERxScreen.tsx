@@ -5,65 +5,54 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
+import {
+  mockDecodeFromImage,
+  mockFetchPrescription,
+} from '../features/erx/mock';
 import { Box, Button, Text, TextInput } from '../shared/components';
 import { addItem } from '../store/slices/cart';
 import { setToken } from '../store/slices/erx';
 import theme from '../theme';
 import { RootStackParamList } from './navigation';
 
-const mockDecodeFromImage = async (): Promise<string> => {
-  await new Promise(r => setTimeout(r, 500));
-  return 'RX-TOKEN-1234-MOCK';
-};
-
-const mockFetchPrescription = async (token: string) => {
-  await new Promise(r => setTimeout(r, 400));
-  return {
-    id: 'rx-ibuprofen-400',
-    name: 'Ibuprofen 400mg (Rx)',
-    qty: 1,
-    price: 4.99,
-    token,
-  };
-};
-
 export default function ERxScreen() {
   const [manual, setManual] = useState('');
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const nav = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const handleFromImage = async () => {
+  const processPrescriptionToken = async (token: string) => {
     try {
       setLoading(true);
-      const token = await mockDecodeFromImage();
       dispatch(setToken(token));
-      const rx = await mockFetchPrescription(token);
-      dispatch(
-        addItem({ id: rx.id, name: rx.name, qty: rx.qty, price: rx.price }),
+      const prescriptions = await mockFetchPrescription(token);
+
+      prescriptions.forEach(rx => {
+        dispatch(
+          addItem({ id: rx.id, name: rx.name, qty: rx.qty, price: rx.price }),
+        );
+      });
+
+      Alert.alert(
+        'Added to cart',
+        `${prescriptions.length} items added with token: ${token}`,
       );
-      Alert.alert('Added to cart', `Token: ${token}`);
-      nav.navigate('Cart');
+      navigation.navigate('Cart');
     } finally {
       setLoading(false);
     }
   };
 
+  const handleFromImage = async () => {
+    const token = await mockDecodeFromImage();
+    await processPrescriptionToken(token);
+  };
+
   const handleFromManual = async () => {
     if (!manual.trim()) return;
-    try {
-      setLoading(true);
-      const token = manual.trim();
-      dispatch(setToken(token));
-      const rx = await mockFetchPrescription(token);
-      dispatch(
-        addItem({ id: rx.id, name: rx.name, qty: rx.qty, price: rx.price }),
-      );
-      Alert.alert('Added to cart', `Token: ${token}`);
-      nav.navigate('Cart');
-    } finally {
-      setLoading(false);
-    }
+    const token = manual.trim();
+    await processPrescriptionToken(token);
   };
 
   return (
@@ -78,9 +67,10 @@ export default function ERxScreen() {
           variant="primary"
           onPress={loading ? undefined : handleFromImage}
           accessibilityLabel="scan-from-image"
+          loading={loading}
           disabled={loading}
         >
-          {loading ? 'Processing…' : 'Read from test image'}
+          Read from test image
         </Button>
 
         <Box marginTop={20}>
