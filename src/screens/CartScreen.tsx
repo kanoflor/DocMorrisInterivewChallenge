@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, ScrollView, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -38,10 +38,10 @@ export default function CartScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
-      <View style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right']}>
+      <View style={styles.content}>
         <ScrollView
-          style={{ flex: 1, paddingTop: 16 }}
+          style={styles.scrollView}
           onScroll={handleScroll}
           scrollEventThrottle={16}
         >
@@ -111,13 +111,7 @@ export default function CartScreen() {
             right={0}
             backgroundColor="surface"
             padding={16}
-            style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: -2 },
-              shadowOpacity: 0.1,
-              shadowRadius: 8,
-              elevation: 8,
-            }}
+            style={styles.footer}
           >
             <Box
               flexDirection="row"
@@ -138,7 +132,7 @@ export default function CartScreen() {
               </Box>
 
               <Box flexDirection="row" gap={8} flex={1}>
-                <Pressable style={{ flex: 1 }}>
+                <Pressable style={styles.buttonFlex}>
                   <Box
                     backgroundColor="cta"
                     borderRadius="md"
@@ -149,12 +143,12 @@ export default function CartScreen() {
                   </Box>
                 </Pressable>
 
-                <Pressable style={{ flex: 1 }}>
+                <Pressable style={styles.buttonFlex}>
                   <Box
                     borderRadius="md"
                     paddingVertical={12}
                     alignItems="center"
-                    style={{ backgroundColor: '#000' }}
+                    style={styles.applePayButton}
                   >
                     <Text variant="buttonMd" color="onPrimary">
                       🍎 Pay
@@ -169,3 +163,29 @@ export default function CartScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+    paddingTop: 16,
+  },
+  footer: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  buttonFlex: {
+    flex: 1,
+  },
+  applePayButton: {
+    backgroundColor: '#000',
+  },
+});

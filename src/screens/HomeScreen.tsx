@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Pressable } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Box } from '../shared/components/Box';
 import { Text } from '../shared/components/Text';
@@ -11,10 +11,7 @@ export default function HomeScreen() {
   const nav = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: theme.colors.background }}
-      edges={['bottom', 'left', 'right']}
-    >
+    <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right']}>
       <Box
         flex={1}
         backgroundColor="background"
@@ -54,3 +51,10 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+});

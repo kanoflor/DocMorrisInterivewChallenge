@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Pressable, TextInput } from 'react-native';
+import { Alert, Pressable, StyleSheet, TextInput } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -70,10 +70,7 @@ export default function ERxScreen() {
   };
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: theme.colors.background }}
-      edges={['bottom', 'left', 'right']}
-    >
+    <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right']}>
       <Box flex={1} padding={16}>
         <Text variant="body2" marginBottom={16}>
           Use a test image or paste a token. (Camera/NFC are mocked on
@@ -112,7 +109,7 @@ export default function ERxScreen() {
               autoCapitalize="characters"
               value={manual}
               onChangeText={setManual}
-              style={{ fontFamily: 'Poppins-Regular', fontSize: 16 }}
+              style={styles.textInput}
               accessibilityLabel="manual-token-input"
             />
           </Box>
@@ -133,3 +130,14 @@ export default function ERxScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+  textInput: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 16,
+  },
+});

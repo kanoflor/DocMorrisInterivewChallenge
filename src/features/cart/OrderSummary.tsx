@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import { Box } from '../../shared/components/Box';
 import { Checkbox } from '../../shared/components/Checkbox';
 import { Text } from '../../shared/components/Text';
@@ -122,7 +122,7 @@ export function OrderSummary({
         </Box>
 
         <Box gap={16} flex={1} marginBottom={16}>
-          <Pressable style={{ flex: 1 }}>
+          <Pressable style={styles.buttonFlex}>
             <Box
               backgroundColor="cta"
               borderRadius="sm"
@@ -133,12 +133,12 @@ export function OrderSummary({
             </Box>
           </Pressable>
 
-          <Pressable style={{ flex: 1 }}>
+          <Pressable style={styles.buttonFlex}>
             <Box
               borderRadius="sm"
               paddingVertical={8}
               alignItems="center"
-              style={{ backgroundColor: '#000' }}
+              style={styles.applePayButton}
             >
               <Text variant="buttonMd" color="onPrimary">
                 Buy with 🍎 Pay
@@ -170,7 +170,7 @@ export function OrderSummary({
               height={4}
               backgroundColor="text"
               marginTop={4}
-              style={{ opacity: 0.3 }}
+              style={styles.progressBar}
             />
           </Box>
         </Box>
@@ -178,3 +178,15 @@ export function OrderSummary({
     </Box>
   );
 }
+
+const styles = StyleSheet.create({
+  buttonFlex: {
+    flex: 1,
+  },
+  applePayButton: {
+    backgroundColor: '#000',
+  },
+  progressBar: {
+    opacity: 0.3,
+  },
+});
