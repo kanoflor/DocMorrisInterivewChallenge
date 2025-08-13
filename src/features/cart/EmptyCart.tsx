@@ -1,9 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Pressable } from 'react-native';
 import { RootStackParamList } from '../../screens/navigation';
-import { Box } from '../../shared/components/Box';
-import { Text } from '../../shared/components/Text';
+import { Box, Button, Text } from '../../shared/components';
 
 const EmptyCartIllustration = () => {
   return (
@@ -153,17 +151,16 @@ export const EmptyCart = () => {
         </Text>
 
         {/* View products button */}
-        <Pressable onPress={() => navigation.navigate('ERx')}>
-          <Box
-            backgroundColor="cta"
-            borderRadius="md"
-            paddingHorizontal={32}
-            paddingVertical={12}
-            alignItems="center"
-          >
-            <Text variant="buttonMd">Scan e-Prescription</Text>
-          </Box>
-        </Pressable>
+        <Button
+          variant="primary"
+          onPress={() => navigation.navigate('ERx')}
+          boxProps={{
+            borderRadius: 'md',
+            paddingHorizontal: 32,
+          }}
+        >
+          Scan e-Prescription
+        </Button>
       </Box>
     </Box>
   );

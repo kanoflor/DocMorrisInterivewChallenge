@@ -1,6 +1,4 @@
-import { Pressable } from 'react-native';
-import { Box } from '../../shared/components/Box';
-import { Text } from '../../shared/components/Text';
+import { Box, Button, Text } from '../../shared/components';
 
 export const QuantitySelector = ({
   quantity,
@@ -18,11 +16,9 @@ export const QuantitySelector = ({
     borderColor="border"
     borderRadius="sm"
   >
-    <Pressable onPress={onDecrease}>
-      <Box paddingHorizontal={12} paddingVertical={8}>
-        <Text variant="body2">−</Text>
-      </Box>
-    </Pressable>
+    <Button variant="icon" onPress={onDecrease}>
+      <Text variant="body2">−</Text>
+    </Button>
     <Box
       paddingHorizontal={16}
       paddingVertical={8}
@@ -31,10 +27,8 @@ export const QuantitySelector = ({
     >
       <Text variant="body2">{quantity}</Text>
     </Box>
-    <Pressable onPress={onIncrease}>
-      <Box paddingHorizontal={12} paddingVertical={8}>
-        <Text variant="body2">+</Text>
-      </Box>
-    </Pressable>
+    <Button variant="icon" onPress={onIncrease}>
+      <Text variant="body2">+</Text>
+    </Button>
   </Box>
 );

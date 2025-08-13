@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Alert, Pressable, StyleSheet, TextInput } from 'react-native';
+import { Alert, StyleSheet, TextInput } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { Box } from '../shared/components/Box';
-import { Text } from '../shared/components/Text';
+import { Box, Button, Text } from '../shared/components';
 import { addItem } from '../store/slices/cart';
 import { setToken } from '../store/slices/erx';
 import theme from '../theme';
@@ -77,22 +76,14 @@ export default function ERxScreen() {
           simulator.)
         </Text>
 
-        <Pressable
+        <Button
+          variant="primary"
           onPress={busy ? undefined : handleFromImage}
           accessibilityLabel="scan-from-image"
+          disabled={busy}
         >
-          <Box
-            backgroundColor="cta"
-            borderRadius="md"
-            paddingVertical={12}
-            alignItems="center"
-            opacity={busy ? 0.6 : 1}
-          >
-            <Text variant="buttonMd">
-              {busy ? 'Processing…' : 'Read from test image'}
-            </Text>
-          </Box>
-        </Pressable>
+          {busy ? 'Processing…' : 'Read from test image'}
+        </Button>
 
         <Box marginTop={20}>
           <Text variant="label" marginBottom={8}>
@@ -101,7 +92,7 @@ export default function ERxScreen() {
           <Box
             borderWidth={1}
             borderColor="border"
-            borderRadius="md"
+            borderRadius="sm"
             padding={12}
           >
             <TextInput
@@ -113,18 +104,14 @@ export default function ERxScreen() {
               accessibilityLabel="manual-token-input"
             />
           </Box>
-          <Pressable onPress={busy ? undefined : handleFromManual}>
-            <Box
-              marginTop={12}
-              backgroundColor="primary"
-              borderRadius="md"
-              paddingVertical={12}
-              alignItems="center"
-              opacity={busy ? 0.6 : 1}
-            >
-              <Text variant="buttonMd">Add with pasted token</Text>
-            </Box>
-          </Pressable>
+          <Button
+            variant="secondary"
+            onPress={busy ? undefined : handleFromManual}
+            disabled={busy}
+            boxProps={{ marginTop: 12 }}
+          >
+            Add with pasted token
+          </Button>
         </Box>
       </Box>
     </SafeAreaView>

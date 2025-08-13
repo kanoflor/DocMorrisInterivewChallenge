@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CartItem } from '../features/cart/CartItem';
 import { EmptyCart } from '../features/cart/EmptyCart';
 import { OrderSummary } from '../features/cart/OrderSummary';
-import { Box } from '../shared/components/Box';
-import { Text } from '../shared/components/Text';
+import { Box, Button, Text } from '../shared/components';
 import type { RootState } from '../store';
 import { deleteItem, updateQuantity } from '../store/slices/cart';
 
@@ -126,35 +125,21 @@ export default function CartScreen() {
                     €{total.toFixed(2)}
                   </Text>
                 </Box>
-                <Pressable>
-                  <Text variant="buttonLink">View details</Text>
-                </Pressable>
+                <Button variant="link">View details</Button>
               </Box>
 
               <Box flexDirection="row" gap={8} flex={1}>
-                <Pressable style={styles.buttonFlex}>
-                  <Box
-                    backgroundColor="cta"
-                    borderRadius="md"
-                    paddingVertical={12}
-                    alignItems="center"
-                  >
-                    <Text variant="buttonMd">Continue</Text>
-                  </Box>
-                </Pressable>
+                <Box style={styles.buttonFlex}>
+                  <Button variant="primary" boxProps={{ borderRadius: 'md' }}>
+                    Continue
+                  </Button>
+                </Box>
 
-                <Pressable style={styles.buttonFlex}>
-                  <Box
-                    borderRadius="md"
-                    paddingVertical={12}
-                    alignItems="center"
-                    style={styles.applePayButton}
-                  >
-                    <Text variant="buttonMd" color="onPrimary">
-                      🍎 Pay
-                    </Text>
-                  </Box>
-                </Pressable>
+                <Box style={styles.buttonFlex}>
+                  <Button variant="applePay" boxProps={{ borderRadius: 'md' }}>
+                    🍎 Pay
+                  </Button>
+                </Box>
               </Box>
             </Box>
           </Box>

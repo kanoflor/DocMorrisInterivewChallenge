@@ -1,8 +1,6 @@
 import React from 'react';
-import { Pressable, StyleSheet } from 'react-native';
-import { Box } from '../../shared/components/Box';
-import { Checkbox } from '../../shared/components/Checkbox';
-import { Text } from '../../shared/components/Text';
+import { StyleSheet } from 'react-native';
+import { Box, Button, Checkbox, Text } from '../../shared/components';
 
 interface OrderSummaryProps {
   subtotal: number;
@@ -70,11 +68,9 @@ export function OrderSummary({
         </Box>
 
         <Box marginBottom={16}>
-          <Pressable>
-            <Text variant="buttonLink" color="cta">
-              Do you have any discount?
-            </Text>
-          </Pressable>
+          <Button variant="link" textColor="cta">
+            Do you have any discount?
+          </Button>
         </Box>
 
         <Box
@@ -122,29 +118,13 @@ export function OrderSummary({
         </Box>
 
         <Box gap={16} flex={1} marginBottom={16}>
-          <Pressable style={styles.buttonFlex}>
-            <Box
-              backgroundColor="cta"
-              borderRadius="sm"
-              paddingVertical={8}
-              alignItems="center"
-            >
-              <Text variant="buttonMd">Continue</Text>
-            </Box>
-          </Pressable>
+          <Button variant="primary" boxProps={{ paddingVertical: 8 }}>
+            Continue
+          </Button>
 
-          <Pressable style={styles.buttonFlex}>
-            <Box
-              borderRadius="sm"
-              paddingVertical={8}
-              alignItems="center"
-              style={styles.applePayButton}
-            >
-              <Text variant="buttonMd" color="onPrimary">
-                Buy with 🍎 Pay
-              </Text>
-            </Box>
-          </Pressable>
+          <Button variant="applePay" boxProps={{ paddingVertical: 8 }}>
+            Buy with 🍎 Pay
+          </Button>
         </Box>
 
         <Box
@@ -158,11 +138,9 @@ export function OrderSummary({
             <Text variant="body2">
               Add 1€ solidarity to my purchase for the research of skin cancer.
             </Text>
-            <Pressable>
-              <Text variant="buttonLink" color="textMuted">
-                More information
-              </Text>
-            </Pressable>
+            <Button variant="link" textColor="textMuted">
+              More information
+            </Button>
             <Text variant="caption1" color="textMuted" marginTop={4}>
               Recauded until now
             </Text>

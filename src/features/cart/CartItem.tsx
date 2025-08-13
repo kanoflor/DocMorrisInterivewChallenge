@@ -1,6 +1,4 @@
-import { Pressable, StyleSheet } from 'react-native';
-import { Box } from '../../shared/components/Box';
-import { Text } from '../../shared/components/Text';
+import { Box, Button, Text } from '../../shared/components';
 import { CartItem as CartItemType } from '../../store/slices/cart';
 import { QuantitySelector } from './QuantitySelector';
 
@@ -59,22 +57,14 @@ export const CartItem = ({
         </Box>
       </Box>
 
-      <Pressable
+      <Button
+        variant="link"
         onPress={() => handleRemoveItem(item.id)}
-        style={styles.removeButton}
+        textColor="textMuted"
+        boxProps={{ marginTop: 12 }}
       >
-        <Box flexDirection="row" alignItems="center">
-          <Text variant="buttonLink" color="textMuted">
-            Remove
-          </Text>
-        </Box>
-      </Pressable>
+        Remove
+      </Button>
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  removeButton: {
-    marginTop: 12,
-  },
-});

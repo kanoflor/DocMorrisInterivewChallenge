@@ -1,9 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Pressable, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Box } from '../shared/components/Box';
-import { Text } from '../shared/components/Text';
+import { Box, Button, Text } from '../shared/components';
 import theme from '../theme';
 import { RootStackParamList } from './navigation';
 
@@ -25,28 +24,17 @@ export default function HomeScreen() {
           Scan an e‑prescription or go to your cart.
         </Text>
 
-        <Pressable onPress={() => nav.navigate('ERx')}>
-          <Box
-            backgroundColor="cta"
-            borderRadius="sm"
-            paddingVertical={12}
-            alignItems="center"
-          >
-            <Text variant="buttonMd">Scan e‑Prescription</Text>
-          </Box>
-        </Pressable>
+        <Button variant="primary" onPress={() => nav.navigate('ERx')}>
+          Scan e‑Prescription
+        </Button>
 
-        <Pressable onPress={() => nav.navigate('Cart')}>
-          <Box
-            marginTop={12}
-            backgroundColor="primary"
-            borderRadius="sm"
-            paddingVertical={12}
-            alignItems="center"
-          >
-            <Text variant="buttonMd">Open Cart</Text>
-          </Box>
-        </Pressable>
+        <Button
+          variant="secondary"
+          onPress={() => nav.navigate('Cart')}
+          boxProps={{ marginTop: 12 }}
+        >
+          Open Cart
+        </Button>
       </Box>
     </SafeAreaView>
   );

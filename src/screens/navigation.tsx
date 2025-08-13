@@ -45,21 +45,9 @@ export default function AppNavigator() {
           };
         }}
       >
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'DocMorris' }}
-        />
-        <Stack.Screen
-          name="ERx"
-          component={ERxScreen}
-          options={{ title: 'e‑Prescription' }}
-        />
-        <Stack.Screen
-          name="Cart"
-          component={CartScreen}
-          options={{ title: 'Cart' }}
-        />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="ERx" component={ERxScreen} />
+        <Stack.Screen name="Cart" component={CartScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
