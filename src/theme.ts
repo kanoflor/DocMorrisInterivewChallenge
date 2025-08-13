@@ -28,7 +28,7 @@ const palette = {
 const theme = createTheme({
   colors: {
     // semantic aliases
-    background: palette.white,
+    background: palette.grey7,
     surface: palette.white,
     primary: palette.trustGreen,
     onPrimary: palette.white,
@@ -139,7 +139,7 @@ const theme = createTheme({
     },
     buttonMd: {
       fontFamily: 'Poppins-Medium',
-      fontSize: 14,
+      fontSize: 16,
       lineHeight: 22,
       color: 'onCta',
     },
@@ -148,6 +148,7 @@ const theme = createTheme({
       fontSize: 13,
       lineHeight: 18,
       color: 'primary',
+      textDecorationLine: 'underline',
     },
     inputText: {
       fontFamily: 'Poppins-Regular',
