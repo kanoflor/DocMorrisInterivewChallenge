@@ -2,13 +2,7 @@
 
 This project is part of the DocMorris coding challenge. The goal is to lay a solid technical foundation for a cross-platform mobile application that serves two different pharmacy brands under DocMorris N.V., with shared functionality and brand-specific UI.
 
-### Assumptions
-
-- The two brands will be handled via runtime theming (not separate builds).
-- No API specifications are provided; mock data and endpoints are used.
-- No detailed design guidelines are given; we assume a clean, accessible UI inspired by modern healthcare apps.
-- Authentication and user login are out of scope for this challenge.
-- Local sensitive data will be stored securely using encrypted local storage (e.g., SecureStore or EncryptedStorage).
+## Part 1: Technical Foundations
 
 ### 🧑‍💻 Programming Language
 
@@ -28,9 +22,6 @@ This project is part of the DocMorris coding challenge. The goal is to lay a sol
 - Improved maintainability and developer experience through consistent usage of `Box`, `Text`, and `Button` components
 
 ### 🧠 State Management
-
-<!-- Assuming that the server data will be retrieved with REST API -->
-<!-- クライアント/サーバー状態を一元管理できるので、UI状態（例: カートの中身）とサーバーデータ（例: 商品在庫情報）の同期がやりやすい -->
 
 **Redux Toolkit + RTK Query**
 
@@ -52,12 +43,6 @@ This project is part of the DocMorris coding challenge. The goal is to lay a sol
 - Deterministic API tests via MSW (REST/GraphQL) without flaky network calls
 - CI-friendly: parallelization/sharding, Android emulator & iOS simulators
 
-<!-- **Why for DocMorris app:**
-
-- Covers both e-commerce and healthcare features (product search, cart, payment, e-prescription via QR/NFC)
-- Supports multi-team (20 devs / 5 squads) parallel development with isolated test layers
-- Reduces backend dependency with MSW for stable CI runs -->
-
 ### ♻️ Reusability of Components
 
 **Storybook + Shopify Restyle + react-i18next**
@@ -68,24 +53,16 @@ This project is part of the DocMorris coding challenge. The goal is to lay a sol
 - Design tokens (colors, typography, spacing) enable easy scaling to new brands or themes
 - Internationalization with react-i18next for multi-language support
 
-<!-- **Why for DocMorris app:**
-- Two-brand requirement (DocMorris / PromoFarma) with identical functionality but distinct branding
-- Supports large multi-team workflow with clear separation of shared vs. feature-specific components
-- Ensures consistent look & feel following DocMorris design guidelines (Trust Green, Magenta, Poppins font)
-- Facilitates rapid onboarding for new developers via documented and tested components -->
-
 ### 🧹 Maintainability
 
 **TypeScript (strict) + ESLint/Prettier + Husky + lint-staged + Zod**
 
 - Strong typing with `strict` mode to catch errors early and refactor safely
 - **Zod** for runtime validation of forms and API responses
-- Centralized validation schemas reused across features (auth, checkout, e‑prescription) <!-- pair with OpenAPI/GraphQL codegen to prevent drift -->
+- Centralized validation schemas reused across features (auth, checkout, e‑prescription)
 - ESLint for consistent code style and best‑practice rules; Prettier for automatic formatting
 - Husky + lint-staged to run lint/format/tests before commits
-- Clear single‑repo structure (e.g., `src/features/*`, `src/shared/{ui,lib,api,validation}`) <!-- to separate concerns and maximize reuse -->
-
-<!-- This setup reduces accidental complexity, improves onboarding, and makes refactoring safer as the app grows. -->
+- Clear single‑repo structure (e.g., `src/features/*`, `src/shared/{ui,lib,api,validation}`)
 
 ### Role of native layer
 
@@ -114,16 +91,6 @@ This project is part of the DocMorris coding challenge. The goal is to lay a sol
 - Auto version bump & changelog from Conventional Commits
 - MSW + Detox in CI to test e-prescription flows (QR/NFC) without real devices
 
-<!-- **Why for DocMorris app**
-
-- Two brands & multiple environments → matrix builds ensure each combo (DocMorris/PromoFarma × iOS/Android × staging/prod) is tested and shipped the same way
-- Healthcare + e‑prescription (QR/NFC) → CI runs deterministic MSW/Detox flows with mocked camera/NFC to protect real data and catch regressions
-- 20‑dev / multi‑squad setup → PR gates (typecheck/lint/tests) give fast feedback and keep trunk stable while teams work in parallel
-- Regulated domain → automated signing, versioning, release notes, and symbol uploads create a reliable audit trail
-- Safer rollouts → TestFlight / Play Internal tracks enable staged releases and quick rollback if issues appear
-- Security by default → short‑lived CI secrets (no keys in repo) and redacted logs prevent PII/PHI leakage
-- Fast, low‑risk fixes → optional CodePush for UI/JS hotfixes (non‑security‑critical) without waiting for store review -->
-
 ### 🛰 Monitoring
 
 **Sentry (mobile)**
@@ -132,12 +99,6 @@ This project is part of the DocMorris coding challenge. The goal is to lay a sol
 - Release Health: link errors to build/brand/env
 - Performance traces on key flows (cold start, QR→NFC→e‑Rx submit, checkout)
 - Alerts to Slack/Teams with SLOs (crash‑free rate, e‑Rx success, payment failures)
-
-<!-- **Why for DocMorris app**
-- Dual-brand & multi-environment: per-brand Release Health and alert routing (DocMorris / PromoFarma; staging / prod).
-- Healthcare-critical flows: trace and alert on e‑prescription steps (QR → NFC → submit) and checkout success.
-- Multi-squad setup (20 devs / 5 teams): ownership rules and regression alerts reduce MTTR across journey touchpoints.
-- Auditable releases: link crashes/errors to build numbers, commits, and changelogs for safer staged rollouts. -->
 
 ### 📊 Tracking
 
@@ -148,13 +109,6 @@ This project is part of the DocMorris coding challenge. The goal is to lay a sol
 - Brand/env segmentation to compare two brands performance
 - Dashboards per squad for conversion, retention, and funnel analysis
 - Consent management integrated with app settings (opt-in/out)
-
-<!-- **Why for DocMorris app**
-
-- Healthcare domain → requires GDPR-compliant, EU-hosted analytics with strict PII handling
-- Two-brand setup → per-brand dashboards to measure conversion and engagement separately
-- Multi-squad workflow → event data segmented by feature area (search, checkout, prescription) for focused improvements
-- Server-side fallback ensures reliable tracking even with ad/tracker blocking or offline usage -->
 
 ### 🔄 OTA Updates
 
@@ -168,13 +122,6 @@ This project is part of the DocMorris coding challenge. The goal is to lay a sol
 - Compliance-safe: no business logic or security-sensitive changes pushed OTA
 - Release notes tied to commit history for auditability
 
-<!-- **Why for DocMorris app**
-
-- Two-brand setup → brand/env-specific deployment keys prevent cross-brand mix-ups:contentReference[oaicite:0]{index=0}
-- Healthcare context → only safe, non-critical updates (UI copy, styling) are delivered OTA to comply with regulations
-- Large multi-squad team → hotfixes can be deployed quickly without waiting for app store reviews
-- Supports rapid iteration on patient-facing UI/UX (e.g., onboarding screens, prescription instructions) while keeping core logic unchanged -->
-
 ### 🔐 Local storing of sensitive health data
 
 **Secure Storage (react-native-keychain / EncryptedSharedPreferences) + Encrypted SQLite (SQLCipher)**
@@ -187,9 +134,40 @@ This project is part of the DocMorris coding challenge. The goal is to lay a sol
 - Keys managed by OS secure hardware (Secure Enclave / TEE)
 - Exclude sensitive data from backups unless encrypted
 
-<!-- **Why for DocMorris app**
+## Part 2: App Recreation
 
-- Handles regulated health data (e-prescriptions, insurance info) under GDPR
-- Two-brand, multi-team setup → standardized secure storage patterns prevent inconsistent handling
-- Offline capability ensures prescriptions can be processed even without network, without compromising security
-- Supports patient trust by allowing full manual deletion of personal data at any time -->
+### Overview
+
+This project is a MVP inspired by the DocMorris app.
+It recreates the cart screen: scanning a prescription (using mock data) and adding the corresponding products to a branded cart screen.
+Built with React Native, TypeScript, Shopify Restyle for theming, and Redux Toolkit for state management, it is structured for easy expansion to real camera/NFC scanning and live API integration.
+
+### 🚧 Unexpectedly Challenging Problems
+
+#### **Type-Safe Theme System Integration**
+
+- **Challenge**: Complex TypeScript patterns with Shopify Restyle
+- **Complexity**: Balancing type safety with developer experience
+- **Solution**: Custom variant patterns with proper type inference
+
+#### **Advanced Component API Design**
+
+- **Challenge**: Creating flexible, reusable components with multiple variants
+- **Complexity**: Type-safe prop interfaces with conditional styling
+- **Example**: `Button` component with 5 variants, `TextInput` with 4 variants
+
+### 📚 Areas Needing Better Open-Source Libraries
+
+#### **React Native Design Systems**
+
+- **Gap**: Comprehensive design system libraries with built-in brand theming
+- **Need**: Pre-built accessible components following platform guidelines
+- **Missing**: Better TypeScript inference for variant systems
+
+### 🤖 Where AI Assistant Proved Most Valuable
+
+#### **High-Value Areas**
+
+- ✅ **TypeScript Pattern Generation**: Complex theme typing, component interfaces
+- ✅ **Design System Architecture**: Consistent component APIs, variant patterns
+- ✅ **State Management Boilerplate**: Redux Toolkit patterns with TypeScript
