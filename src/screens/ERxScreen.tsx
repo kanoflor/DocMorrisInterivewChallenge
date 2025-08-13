@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, TextInput } from 'react-native';
+import { Alert, StyleSheet } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { Box, Button, Text } from '../shared/components';
+import { Box, Button, Text, TextInput } from '../shared/components';
 import { addItem } from '../store/slices/cart';
 import { setToken } from '../store/slices/erx';
 import theme from '../theme';
@@ -86,24 +86,15 @@ export default function ERxScreen() {
         </Button>
 
         <Box marginTop={20}>
-          <Text variant="label" marginBottom={8}>
-            Or paste token
-          </Text>
-          <Box
-            borderWidth={1}
-            borderColor="border"
-            borderRadius="sm"
-            padding={12}
-          >
-            <TextInput
-              placeholder="e.g. RX-ABCDE-12345"
-              autoCapitalize="characters"
-              value={manual}
-              onChangeText={setManual}
-              style={styles.textInput}
-              accessibilityLabel="manual-token-input"
-            />
-          </Box>
+          <TextInput
+            variant="prescription"
+            label="Or paste token"
+            placeholder="e.g. RX-ABCDE-12345"
+            autoCapitalize="characters"
+            value={manual}
+            onChangeText={setManual}
+            accessibilityLabel="manual-token-input"
+          />
           <Button
             variant="secondary"
             onPress={busy ? undefined : handleFromManual}
@@ -122,9 +113,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.background,
-  },
-  textInput: {
-    fontFamily: 'Poppins-Regular',
-    fontSize: 16,
   },
 });
