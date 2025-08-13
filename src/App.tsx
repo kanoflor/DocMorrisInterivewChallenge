@@ -10,7 +10,7 @@ import theme from './theme';
 // Uncomment the line below to enable Storybook
 import Storybook from '../.storybook/Storybook';
 
-const SHOW_STORYBOOK = true; // Set to true to show Storybook
+const SHOW_STORYBOOK = false; // Set to true to show Storybook
 
 export default function App() {
   if (SHOW_STORYBOOK) {

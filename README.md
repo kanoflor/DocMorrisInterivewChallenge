@@ -2,6 +2,38 @@
 
 This project is part of the DocMorris coding challenge. The goal is to lay a solid technical foundation for a cross-platform mobile application that serves two different pharmacy brands under DocMorris N.V., with shared functionality and brand-specific UI.
 
+### 🚀 Quick Start
+
+#### Prerequisites
+
+- Node.js 18+
+- React Native development environment setup
+- iOS Simulator (macOS) or Android emulator
+
+#### Installation & Run
+
+```bash
+# Install dependencies
+npm install
+
+# iOS (macOS only)
+cd ios && pod install && cd ..
+npm run ios
+
+# Android
+npm run android
+
+# Development server
+npm start
+```
+
+#### Storybook (Component Library)
+
+To view the component library in-app:
+
+1. Set `SHOW_STORYBOOK = true` in `src/App.tsx`
+2. Restart the app to see Storybook interface
+
 ## Part 1: Technical Foundations
 
 ### 🧑‍💻 Programming Language
