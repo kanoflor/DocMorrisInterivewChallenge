@@ -7,7 +7,8 @@ import theme from '../theme';
 import { RootStackParamList } from './navigation';
 
 export default function HomeScreen() {
-  const nav = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
     <SafeAreaView style={styles.container} edges={['bottom', 'left', 'right']}>
@@ -24,13 +25,13 @@ export default function HomeScreen() {
           Scan an e‑prescription or go to your cart.
         </Text>
 
-        <Button variant="primary" onPress={() => nav.navigate('ERx')}>
+        <Button variant="primary" onPress={() => navigation.navigate('ERx')}>
           Scan e‑Prescription
         </Button>
 
         <Button
           variant="secondary"
-          onPress={() => nav.navigate('Cart')}
+          onPress={() => navigation.navigate('Cart')}
           boxProps={{ marginTop: 12 }}
         >
           Open Cart

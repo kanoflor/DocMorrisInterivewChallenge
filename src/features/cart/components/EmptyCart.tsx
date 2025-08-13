@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../screens/navigation';
-import { Box, Button, Text } from '../../shared/components';
+import { RootStackParamList } from '../../../screens/navigation';
+import { Box, Button, Text } from '../../../shared/components';
 
 const EmptyCartIllustration = () => {
   return (

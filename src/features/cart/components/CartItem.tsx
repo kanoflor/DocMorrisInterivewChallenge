@@ -1,18 +1,13 @@
-import { Box, Button, Text } from '../../shared/components';
-import { CartItem as CartItemType } from '../../store/slices/cart';
+import { Box, Button, Text } from '../../../shared/components';
+import { CartItem as CartItemType } from '../../../store/slices/cart';
 import { QuantitySelector } from './QuantitySelector';
 
-type CartItemProps = {
+interface CartItemProps {
   item: CartItemType;
-  handleQuantityChange: (id: string, qty: number) => void;
   handleRemoveItem: (id: string) => void;
-};
+}
 
-export const CartItem = ({
-  item,
-  handleQuantityChange,
-  handleRemoveItem,
-}: CartItemProps) => {
+export const CartItem = ({ item, handleRemoveItem }: CartItemProps) => {
   return (
     <Box
       key={item.id}
@@ -47,11 +42,7 @@ export const CartItem = ({
             justifyContent="space-between"
             alignItems="center"
           >
-            <QuantitySelector
-              quantity={item.qty}
-              onIncrease={() => handleQuantityChange(item.id, item.qty + 1)}
-              onDecrease={() => handleQuantityChange(item.id, item.qty - 1)}
-            />
+            <QuantitySelector itemId={item.id} quantity={item.qty} />
             <Text variant="title3">{item.price.toFixed(2)}€</Text>
           </Box>
         </Box>

@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import {
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { CartItem } from '../features/cart/CartItem';
-import { EmptyCart } from '../features/cart/EmptyCart';
-import { OrderSummary } from '../features/cart/OrderSummary';
+import { CartItem } from '../features/cart/components/CartItem';
+import { EmptyCart } from '../features/cart/components/EmptyCart';
+import { OrderSummary } from '../features/cart/components/OrderSummary';
 import { Box, Button, Text } from '../shared/components';
 import type { RootState } from '../store';
-import { deleteItem, updateQuantity } from '../store/slices/cart';
+import { deleteItem } from '../store/slices/cart';
 
 export default function CartScreen() {
   const items = useSelector((s: RootState) => s.cart.items);
@@ -17,7 +23,7 @@ export default function CartScreen() {
 
   const [isFooterVisible, setIsFooterVisible] = useState(true);
 
-  const handleScroll = (event: any) => {
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
     const scrollY = contentOffset.y;
     const screenHeight = layoutMeasurement.height;
@@ -26,10 +32,6 @@ export default function CartScreen() {
     const threshold = contentHeight - screenHeight - 200;
 
     setIsFooterVisible(scrollY < threshold);
-  };
-
-  const handleQuantityChange = (id: string, newQty: number) => {
-    dispatch(updateQuantity({ id, qty: newQty }));
   };
 
   const handleRemoveItem = (id: string) => {
@@ -86,7 +88,6 @@ export default function CartScreen() {
                   <CartItem
                     key={item.id}
                     item={item}
-                    handleQuantityChange={handleQuantityChange}
                     handleRemoveItem={handleRemoveItem}
                   />
                 ))}

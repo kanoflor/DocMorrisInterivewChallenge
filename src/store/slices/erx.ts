@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type State = { token?: string };
+interface State {
+  token?: string;
+}
 const initialState: State = {};
 
 const erx = createSlice({

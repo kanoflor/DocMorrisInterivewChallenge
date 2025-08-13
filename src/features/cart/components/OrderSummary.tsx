@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Box, Button, Checkbox, Text } from '../../shared/components';
+import { Box, Button, Checkbox, Text } from '../../../shared/components';
 
 interface OrderSummaryProps {
   subtotal: number;

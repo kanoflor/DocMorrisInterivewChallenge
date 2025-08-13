@@ -12,13 +12,11 @@ import theme from '../theme';
 import { RootStackParamList } from './navigation';
 
 const mockDecodeFromImage = async (): Promise<string> => {
-  // TODO: VisionCamera+code-scanner や zxing に差し替え
   await new Promise(r => setTimeout(r, 500));
   return 'RX-TOKEN-1234-MOCK';
 };
 
 const mockFetchPrescription = async (token: string) => {
-  // TODO: MSW で差し替え可能
   await new Promise(r => setTimeout(r, 400));
   return {
     id: 'rx-ibuprofen-400',
@@ -31,13 +29,13 @@ const mockFetchPrescription = async (token: string) => {
 
 export default function ERxScreen() {
   const [manual, setManual] = useState('');
-  const [busy, setBusy] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const nav = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handleFromImage = async () => {
     try {
-      setBusy(true);
+      setLoading(true);
       const token = await mockDecodeFromImage();
       dispatch(setToken(token));
       const rx = await mockFetchPrescription(token);
@@ -47,14 +45,14 @@ export default function ERxScreen() {
       Alert.alert('Added to cart', `Token: ${token}`);
       nav.navigate('Cart');
     } finally {
-      setBusy(false);
+      setLoading(false);
     }
   };
 
   const handleFromManual = async () => {
     if (!manual.trim()) return;
     try {
-      setBusy(true);
+      setLoading(true);
       const token = manual.trim();
       dispatch(setToken(token));
       const rx = await mockFetchPrescription(token);
@@ -64,7 +62,7 @@ export default function ERxScreen() {
       Alert.alert('Added to cart', `Token: ${token}`);
       nav.navigate('Cart');
     } finally {
-      setBusy(false);
+      setLoading(false);
     }
   };
 
@@ -78,11 +76,11 @@ export default function ERxScreen() {
 
         <Button
           variant="primary"
-          onPress={busy ? undefined : handleFromImage}
+          onPress={loading ? undefined : handleFromImage}
           accessibilityLabel="scan-from-image"
-          disabled={busy}
+          disabled={loading}
         >
-          {busy ? 'Processing…' : 'Read from test image'}
+          {loading ? 'Processing…' : 'Read from test image'}
         </Button>
 
         <Box marginTop={20}>
@@ -97,8 +95,8 @@ export default function ERxScreen() {
           />
           <Button
             variant="secondary"
-            onPress={busy ? undefined : handleFromManual}
-            disabled={busy}
+            onPress={loading ? undefined : handleFromManual}
+            disabled={loading}
             boxProps={{ marginTop: 12 }}
           >
             Add with pasted token
