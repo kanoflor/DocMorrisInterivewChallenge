@@ -13,7 +13,6 @@ const EmptyCartIllustration = () => {
         justifyContent="center"
         position="relative"
       >
-        {/* Background decorative elements */}
         <Box
           position="absolute"
           width={100}
@@ -51,7 +50,6 @@ const EmptyCartIllustration = () => {
           right={10}
         />
 
-        {/* Shopping cart icon */}
         <Box
           width={60}
           height={50}
@@ -61,7 +59,6 @@ const EmptyCartIllustration = () => {
           position="relative"
           backgroundColor="background"
         >
-          {/* Cart handle */}
           <Box
             position="absolute"
             top={-8}
@@ -74,7 +71,6 @@ const EmptyCartIllustration = () => {
             backgroundColor="background"
           />
 
-          {/* Sparkle lines */}
           <Box
             position="absolute"
             top={-15}
@@ -101,7 +97,6 @@ const EmptyCartIllustration = () => {
           />
         </Box>
 
-        {/* Cart wheels */}
         <Box
           position="absolute"
           bottom={-15}
@@ -150,14 +145,10 @@ export const EmptyCart = () => {
           care of yourself
         </Text>
 
-        {/* View products button */}
         <Button
           variant="primary"
           onPress={() => navigation.navigate('ERx')}
-          boxProps={{
-            borderRadius: 'md',
-            paddingHorizontal: 32,
-          }}
+          boxProps={{ paddingHorizontal: 32 }}
         >
           Scan e-Prescription
         </Button>

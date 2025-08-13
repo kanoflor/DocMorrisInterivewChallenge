@@ -52,7 +52,6 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const isDisabled = disabled || loading;
 
-  // Get button styling based on variant
   const getButtonStyle = () => {
     switch (variant) {
       case 'primary':
@@ -70,7 +69,7 @@ export const Button: React.FC<ButtonProps> = ({
       case 'applePay':
         return {
           backgroundColor: 'text' as keyof Theme['colors'],
-          borderRadius: 'md' as keyof Theme['borderRadii'],
+          borderRadius: 'sm' as keyof Theme['borderRadii'],
           paddingVertical: 12 as keyof Theme['spacing'],
         };
       case 'link':
@@ -95,7 +94,6 @@ export const Button: React.FC<ButtonProps> = ({
     }
   };
 
-  // Determine text variant based on button variant if not explicitly provided
   const getTextVariant = () => {
     if (textVariant) return textVariant;
 
@@ -107,7 +105,6 @@ export const Button: React.FC<ButtonProps> = ({
     }
   };
 
-  // Determine text color based on button variant if not explicitly provided
   const getTextColor = () => {
     if (textColor) return textColor;
 
